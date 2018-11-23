@@ -24,6 +24,12 @@ const AudioUnitParameterID volumeParam = 0;
 
 @implementation VolumeAudioUnit {
     AUAudioUnitBus *_inputBus;
+    
+    // storage
+    AVAudioPCMBuffer *pcmBuffer;
+    AudioBufferList* mutableAudioBufferList;
+    AudioBufferList const* originalAudioBufferList;
+    AUAudioFrameCount maxFrames;;
 }
 @synthesize parameterTree = _parameterTree;
 
@@ -123,11 +129,27 @@ const AudioUnitParameterID volumeParam = 0;
 - (AUInternalRenderBlock)internalRenderBlock {
     // Capture in locals to avoid Obj-C member lookups. If "self" is captured in render, we're doing it wrong. See sample code.
     
+    __block AudioBufferList * _mutableAudioBufferList = mutableAudioBufferList;
+    
     return ^AUAudioUnitStatus(AudioUnitRenderActionFlags *actionFlags, const AudioTimeStamp *timestamp, AVAudioFrameCount frameCount, NSInteger outputBusNumber, AudioBufferList *outputData, const AURenderEvent *realtimeEventListHead, AURenderPullInputBlock pullInputBlock) {
         // Do event handling and signal processing here.
+        AudioUnitRenderActionFlags pullFlags = 0;
+        AUAudioUnitStatus err = pullInputBlock(&pullFlags, timestamp, frameCount,0,_mutableAudioBufferList);
+        
+        if (err != 0) {
+            NSLog(@"pullInputBlock error %d", err);
+            return err;
+        }
         
         return noErr;
     };
+}
+
+-(void) initBuffers {
+    AVAudioPCMBuffer *pcmBuffer = nullptr;
+    AudioBufferList* mutableAudioBufferList = nullptr;
+    AudioBufferList const* originalAudioBufferList = nullptr;
+    AUAudioFrameCount maxFrames = 0;
 }
 
 @end
