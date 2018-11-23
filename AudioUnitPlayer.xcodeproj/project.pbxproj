@@ -62,6 +62,7 @@
 		90D8FBC121A776B1002F99BD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		90D8FBC321A776B1002F99BD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		90D8FBC421A776B1002F99BD /* VolumeAudioUnit-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "VolumeAudioUnit-Bridging-Header.h"; sourceTree = "<group>"; };
+		90D8FBD021A785E4002F99BD /* Buffers.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Buffers.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +132,7 @@
 			children = (
 				90D8FBBB21A776B1002F99BD /* VolumeAudioUnit.h */,
 				90D8FBBC21A776B1002F99BD /* VolumeAudioUnit.mm */,
+				90D8FBD021A785E4002F99BD /* Buffers.hpp */,
 				90D8FBC421A776B1002F99BD /* VolumeAudioUnit-Bridging-Header.h */,
 			);
 			path = Shared;

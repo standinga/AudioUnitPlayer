@@ -7,7 +7,7 @@
 //
 
 #import "VolumeAudioUnit.h"
-
+#import "Buffers.hpp"
 #import <AVFoundation/AVFoundation.h>
 
 // Define parameter addresses.
@@ -24,12 +24,7 @@ const AudioUnitParameterID volumeParam = 0;
 
 @implementation VolumeAudioUnit {
     AUAudioUnitBus *_inputBus;
-    
-    // storage
-    AVAudioPCMBuffer *pcmBuffer;
-    AudioBufferList* mutableAudioBufferList;
-    AudioBufferList const* originalAudioBufferList;
-    AUAudioFrameCount maxFrames;;
+    Buffers _buffers;
 }
 @synthesize parameterTree = _parameterTree;
 
@@ -109,6 +104,7 @@ const AudioUnitParameterID volumeParam = 0;
         return NO;
     }
     // Allocate your resources.
+    _buffers.allocateRenderResources(self.maximumFramesToRender, _inputBus.format);
     
     return YES;
 }
@@ -129,27 +125,30 @@ const AudioUnitParameterID volumeParam = 0;
 - (AUInternalRenderBlock)internalRenderBlock {
     // Capture in locals to avoid Obj-C member lookups. If "self" is captured in render, we're doing it wrong. See sample code.
     
-    __block AudioBufferList * _mutableAudioBufferList = mutableAudioBufferList;
-    
+    __block Buffers *buffers = &_buffers;
     return ^AUAudioUnitStatus(AudioUnitRenderActionFlags *actionFlags, const AudioTimeStamp *timestamp, AVAudioFrameCount frameCount, NSInteger outputBusNumber, AudioBufferList *outputData, const AURenderEvent *realtimeEventListHead, AURenderPullInputBlock pullInputBlock) {
         // Do event handling and signal processing here.
         AudioUnitRenderActionFlags pullFlags = 0;
-        AUAudioUnitStatus err = pullInputBlock(&pullFlags, timestamp, frameCount,0,_mutableAudioBufferList);
+        buffers->prepareInputBufferList();
+        AUAudioUnitStatus err = pullInputBlock(&pullFlags, timestamp, frameCount, 0, buffers->mutableAudioBufferList);
         
         if (err != 0) {
             NSLog(@"pullInputBlock error %d", err);
             return err;
         }
+        AudioBufferList *inAudioBufferList = buffers->mutableAudioBufferList;
+        AudioBufferList *outputAudioBufferList = outputData;
+        
+        float *input = (float*)inAudioBufferList->mBuffers[0].mData;
+        float *output = (float*)outputAudioBufferList->mBuffers[0].mData;
+        UInt32 dataSize = inAudioBufferList->mBuffers[0].mDataByteSize;
+        
+        for (int i = 0; i < dataSize; i++) {
+            output[i] = input[i];
+        }
         
         return noErr;
     };
-}
-
--(void) initBuffers {
-    AVAudioPCMBuffer *pcmBuffer = nullptr;
-    AudioBufferList* mutableAudioBufferList = nullptr;
-    AudioBufferList const* originalAudioBufferList = nullptr;
-    AUAudioFrameCount maxFrames = 0;
 }
 
 @end
