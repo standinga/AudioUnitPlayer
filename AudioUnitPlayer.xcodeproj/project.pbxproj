@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		908C018521A7A2EA0049FC81 /* VisualizeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908C018421A7A2EA0049FC81 /* VisualizeView.swift */; };
 		90D8FBA021A76631002F99BD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D8FB9F21A76631002F99BD /* AppDelegate.swift */; };
 		90D8FBA221A76631002F99BD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D8FBA121A76631002F99BD /* ViewController.swift */; };
 		90D8FBA521A76631002F99BD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 90D8FBA321A76631002F99BD /* Main.storyboard */; };
@@ -47,6 +48,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		908C018421A7A2EA0049FC81 /* VisualizeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualizeView.swift; sourceTree = "<group>"; };
 		90D8FB9C21A76631002F99BD /* AudioUnitPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AudioUnitPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		90D8FB9F21A76631002F99BD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		90D8FBA121A76631002F99BD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -108,6 +110,7 @@
 			children = (
 				90D8FB9F21A76631002F99BD /* AppDelegate.swift */,
 				90D8FBA121A76631002F99BD /* ViewController.swift */,
+				908C018421A7A2EA0049FC81 /* VisualizeView.swift */,
 				90D8FBB121A7668B002F99BD /* AudioPlayer.swift */,
 				90D8FBA321A76631002F99BD /* Main.storyboard */,
 				90D8FBA621A76631002F99BD /* Assets.xcassets */,
@@ -243,6 +246,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				90D8FBD121A78ED7002F99BD /* AudioUnitViewController.swift in Sources */,
+				908C018521A7A2EA0049FC81 /* VisualizeView.swift in Sources */,
 				90D8FBA221A76631002F99BD /* ViewController.swift in Sources */,
 				90D8FBA021A76631002F99BD /* AppDelegate.swift in Sources */,
 				90D8FBCE21A778AE002F99BD /* VolumeAudioUnit.mm in Sources */,

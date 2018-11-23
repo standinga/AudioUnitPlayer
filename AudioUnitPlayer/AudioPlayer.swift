@@ -8,7 +8,13 @@
 
 import AVFoundation
 
+protocol AudioPlayerDelegate: class {
+    func onBuffer(_ samples: UnsafeBufferPointer<Float>)
+}
+
 public class AudioPlayer: NSObject {
+    
+    weak var delegate: AudioPlayerDelegate?
     
     public var auAudioUnit: AUAudioUnit?
     
@@ -88,6 +94,12 @@ public class AudioPlayer: NSObject {
             
             /// effect -> mixer
             self.engine.connect(avAudioUnit, to: self.engine.mainMixerNode, format: self.file!.processingFormat)
+            
+            // get samples from audio unit
+            avAudioUnit.installTap(onBus: 0, bufferSize: 1024, format: self.file!.processingFormat) { buffer, timestamp in
+                let sampleData = UnsafeBufferPointer(start: buffer.floatChannelData![0], count: Int(buffer.frameLength))
+                self.delegate?.onBuffer(sampleData)
+            }
             
             self.auAudioUnit = avAudioUnit.auAudioUnit
             avAudioUnit.auAudioUnit.contextName = "running in AUv3Host"

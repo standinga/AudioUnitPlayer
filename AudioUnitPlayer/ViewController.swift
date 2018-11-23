@@ -15,9 +15,13 @@ class ViewController: UIViewController {
     private var player: AudioPlayer!
     var pluginVC: AudioUnitViewController!
     
+    @IBOutlet weak var pluginContainer: UIView!
+    @IBOutlet weak var visualizeView: VisualizeView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         player = AudioPlayer()
+        player.delegate = self
         addPluginView()
         var componentDescription = AudioComponentDescription()
         componentDescription.componentType = kAudioUnitType_Effect
@@ -53,12 +57,16 @@ class ViewController: UIViewController {
         addChild(pluginVC)
         if let view = pluginVC.view {
             addChild(pluginVC)
-            view.frame = self.view.bounds
-            
-            self.view.addSubview(view)
+            view.frame = pluginContainer.bounds
+            pluginContainer.addSubview(view)
             pluginVC.didMove(toParent: self)
         }
-        
+    }
+}
+
+extension ViewController : AudioPlayerDelegate {
+    func onBuffer(_ samples: UnsafeBufferPointer<Float>) {
+        visualizeView.updateBuffer(samples)
     }
 }
 
