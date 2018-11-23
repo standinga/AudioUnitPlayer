@@ -14,8 +14,12 @@ class VisualizeView: UIView {
     
     private var averages = [Float]()
     private var vertMiddle: CGFloat = 0
+    private var lastXPosition: CGFloat = 0
+    private var paths = [UIBezierPath]()
+    
     override func draw(_ rect: CGRect) {
-        showAverages()
+        clearsContextBeforeDrawing = false
+        showAverages(rect)
     }
     
     override func layoutSubviews() {
@@ -24,19 +28,19 @@ class VisualizeView: UIView {
     }
     
     func updateBuffer(_ samples: UnsafeBufferPointer<Float>) {
-        processQueue.async {
+        processQueue.sync {
             let count = Float(samples.count)
-            let slices = 50
+            let slices = 20
             let bucketSize = samples.count / slices
             
             var sum: Float = 0
             for i in 0..<slices {
                 sum = 0
                 for j in 0..<bucketSize {
-                    sum += samples[i * j + j]
+                    sum += abs(samples[i * j + j])
                 }
                 let average = sum / count
-                self.averages.append(average)
+                self.averages.append(average * 100)
             }
             DispatchQueue.main.async {
                 self.setNeedsDisplay()
@@ -44,16 +48,29 @@ class VisualizeView: UIView {
         }
     }
     
-    private func showAverages() {
-        let path = UIBezierPath()
-        
-        let scale = Float(40000.0)
-        path.move(to: CGPoint(x: 0, y: self.vertMiddle))
-        for i in 0..<self.averages.count {
-            path.addLine(to: CGPoint(x: CGFloat(i) * 0.3, y: vertMiddle - CGFloat(self.averages[i] * scale)))
+    private func showAverages(_ rect: CGRect) {
+        guard averages.count > 0 else {
+            return
+        }
+        if lastXPosition > self.frame.width {
+            lastXPosition = 0
+            paths.removeAll()
+        }
+        let path = UIBezierPath(rect: rect)
+        print(averages.count)
+        let scale = Float(400.0)
+        path.move(to: CGPoint(x: lastXPosition, y: vertMiddle - CGFloat(averages[0] * scale)))
+        for i in 1..<averages.count {
+            lastXPosition += CGFloat(i) * 0.1
+            path.addLine(to: CGPoint(x: lastXPosition, y: vertMiddle - CGFloat(averages[i] * scale)))
         }
         UIColor.blue.setStroke()
-        path.lineWidth = 2
-        path.stroke()
+        
+        averages.removeAll()
+        paths.append(path)
+        paths.forEach {
+            $0.lineWidth = 2
+            $0.stroke()
+        }
     }
 }
