@@ -14,7 +14,6 @@ class ViewController: UIViewController {
 
     private var player: AudioPlayer!
     var pluginVC: AudioUnitViewController!
-    var volumeParameter: AUParameter!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,17 +28,7 @@ class ViewController: UIViewController {
         AUAudioUnit.registerSubclass(VolumeAudioUnit.self, as: componentDescription, name: "VoluemPlugin", version: UInt32.max)
         
         player.selectAudioUnitWithComponentDescription(componentDescription) {
-            guard let audioUnit = self.player.auAudioUnit as? AUAudioUnit else {
-                fatalError("can't cast audio unit")
-            }
-            
-            guard let parameterTree =
-                audioUnit.parameterTree else {
-                fatalError("player auAudioUnit nil!")
-            }
-            self.pluginVC.audioUnit = audioUnit
-            self.volumeParameter = parameterTree.value(forKey: "volume") as? AUParameter
-           
+            self.pluginVC.audioUnit = self.player.auAudioUnit
         }
     }
     
