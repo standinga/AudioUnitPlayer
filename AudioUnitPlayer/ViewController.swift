@@ -13,10 +13,13 @@ import VolumeAudioUnit
 class ViewController: UIViewController {
 
     private var player: AudioPlayer!
+    var pluginVC: AudioUnitViewController!
+    var volumeParameter: AUParameter!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         player = AudioPlayer()
-        
+        addPluginView()
         var componentDescription = AudioComponentDescription()
         componentDescription.componentType = kAudioUnitType_Effect
         componentDescription.componentSubType = 0x766f6c75 // 'volu' in hex using https://codebeautify.org/string-hex-converter
@@ -26,13 +29,47 @@ class ViewController: UIViewController {
         AUAudioUnit.registerSubclass(VolumeAudioUnit.self, as: componentDescription, name: "VoluemPlugin", version: UInt32.max)
         
         player.selectAudioUnitWithComponentDescription(componentDescription) {
+            guard let audioUnit = self.player.auAudioUnit as? AUAudioUnit else {
+                fatalError("can't cast audio unit")
+            }
             
+            guard let parameterTree =
+                audioUnit.parameterTree else {
+                fatalError("player auAudioUnit nil!")
+            }
+            self.pluginVC.audioUnit = audioUnit
+            self.volumeParameter = parameterTree.value(forKey: "volume") as? AUParameter
+           
         }
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         player.play()
+    }
+    
+    private func addPluginView() {
+        let builtInPluginsURL = Bundle.main.builtInPlugInsURL
+        guard let pluginURL = builtInPluginsURL?.appendingPathComponent("VolumeAudioUnit.appex") else {
+            fatalError("can't get plugin URL")
+        }
+        let appExtensionBundle = Bundle(url: pluginURL)
+        
+        let storyboard = UIStoryboard(name: "MainInterface", bundle: appExtensionBundle)
+        guard let pvc = storyboard.instantiateInitialViewController() as? AudioUnitViewController else {
+            fatalError("can't instantiate plugin vc")
+        }
+        pluginVC = pvc
+        
+        addChild(pluginVC)
+        if let view = pluginVC.view {
+            addChild(pluginVC)
+            view.frame = self.view.bounds
+            
+            self.view.addSubview(view)
+            pluginVC.didMove(toParent: self)
+        }
+        
     }
 }
 

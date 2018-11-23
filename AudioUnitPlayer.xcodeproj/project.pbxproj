@@ -19,6 +19,7 @@
 		90D8FBC221A776B1002F99BD /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 90D8FBC021A776B1002F99BD /* MainInterface.storyboard */; };
 		90D8FBC721A776B1002F99BD /* VolumeAudioUnit.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 90D8FBB921A776B1002F99BD /* VolumeAudioUnit.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		90D8FBCE21A778AE002F99BD /* VolumeAudioUnit.mm in Sources */ = {isa = PBXBuildFile; fileRef = 90D8FBBC21A776B1002F99BD /* VolumeAudioUnit.mm */; };
+		90D8FBD121A78ED7002F99BD /* AudioUnitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D8FBBE21A776B1002F99BD /* AudioUnitViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -241,6 +242,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				90D8FBD121A78ED7002F99BD /* AudioUnitViewController.swift in Sources */,
 				90D8FBA221A76631002F99BD /* ViewController.swift in Sources */,
 				90D8FBA021A76631002F99BD /* AppDelegate.swift in Sources */,
 				90D8FBCE21A778AE002F99BD /* VolumeAudioUnit.mm in Sources */,

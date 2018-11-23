@@ -25,6 +25,7 @@ const AudioUnitParameterID volumeParam = 0;
 @implementation VolumeAudioUnit {
     AUAudioUnitBus *_inputBus;
     Buffers _buffers;
+    float volume;
 }
 @synthesize parameterTree = _parameterTree;
 
@@ -34,6 +35,7 @@ const AudioUnitParameterID volumeParam = 0;
     if (self == nil) {
         return nil;
     }
+    volume = 1;
     // Initialize a default format for the busses.
     AVAudioFormat *defaultFormat = [[AVAudioFormat alloc] initStandardFormatWithSampleRate:44100.0 channels:2];
     
@@ -64,6 +66,10 @@ const AudioUnitParameterID volumeParam = 0;
             default:
                 return @"?";
         }
+    };
+    __block float *volumePtr = &volume;
+    _parameterTree.implementorValueObserver = ^(AUParameter *param, AUValue value) {
+        *volumePtr = value;
     };
     
     self.maximumFramesToRender = 512;
@@ -126,6 +132,7 @@ const AudioUnitParameterID volumeParam = 0;
     // Capture in locals to avoid Obj-C member lookups. If "self" is captured in render, we're doing it wrong. See sample code.
     
     __block Buffers *buffers = &_buffers;
+    __block float *volumePtr = &volume;
     return ^AUAudioUnitStatus(AudioUnitRenderActionFlags *actionFlags, const AudioTimeStamp *timestamp, AVAudioFrameCount frameCount, NSInteger outputBusNumber, AudioBufferList *outputData, const AURenderEvent *realtimeEventListHead, AURenderPullInputBlock pullInputBlock) {
         // Do event handling and signal processing here.
         AudioUnitRenderActionFlags pullFlags = 0;
@@ -142,9 +149,9 @@ const AudioUnitParameterID volumeParam = 0;
         float *input = (float*)inAudioBufferList->mBuffers[0].mData;
         float *output = (float*)outputAudioBufferList->mBuffers[0].mData;
         UInt32 dataSize = inAudioBufferList->mBuffers[0].mDataByteSize;
-        
+        float vol = *volumePtr;
         for (int i = 0; i < dataSize; i++) {
-            output[i] = input[i];
+            output[i] = vol * input[i];
         }
         
         return noErr;

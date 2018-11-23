@@ -10,8 +10,25 @@ import CoreAudioKit
 import AVFoundation
 
 public class AudioUnitViewController: AUViewController, AUAudioUnitFactory {
-    var audioUnit: AUAudioUnit?
     
+    public var audioUnit: AUAudioUnit? {
+        didSet {
+            /*
+             We may be on a dispatch worker queue processing an XPC request at
+             this time, and quite possibly the main queue is busy creating the
+             view. To be thread-safe, dispatch onto the main queue.
+             
+             It's also possible that we are already on the main queue, so to
+             protect against deadlock in that case, dispatch asynchronously.
+             */
+            DispatchQueue.main.async {
+                if self.isViewLoaded {
+                    self.connectWithAU()
+                }
+            }
+        }
+    }
+    private var volumeParameter: AUParameter?
     public override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -19,7 +36,14 @@ public class AudioUnitViewController: AUViewController, AUAudioUnitFactory {
             return
         }
         
-        // Get the parameter tree and add observers for any parameters that the UI needs to keep in sync with the AudioUnit
+        connectWithAU()
+    }
+    
+    public func connectWithAU() {
+        guard let paramTree = audioUnit?.parameterTree else {
+            fatalError("paramTree nil!")
+        }
+        volumeParameter = paramTree.value(forKey: "volume") as? AUParameter
     }
     
     public func createAudioUnit(with componentDescription: AudioComponentDescription) throws -> AUAudioUnit {
@@ -28,4 +52,7 @@ public class AudioUnitViewController: AUViewController, AUAudioUnitFactory {
         return audioUnit!
     }
     
+    @IBAction func volumeSliderAction(_ sender: UISlider) {
+        volumeParameter?.value = sender.value
+    }
 }
