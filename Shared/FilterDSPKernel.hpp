@@ -81,6 +81,27 @@ public:
 		float b0 = 0.0;
 		float b1 = 0.0;
 		float b2 = 0.0;
+        
+        void calculateLowPassParams(double frequency, int order, double resonance) {
+            /*
+             The transcendental function calls here could be replaced with
+             interpolated table lookups or other approximations.
+             */
+            
+            // Convert from decibels to linear.
+            double r = pow(10.0, 0.05 * -resonance);
+            
+            double k  = 0.5 * r * sin(M_PI * frequency);
+            double c1 = (1.0 - k) / (1.0 + k);
+            double c2 = (1.0 + c1) * cos(M_PI * frequency);
+            double c3 = (1.0 + c1 - c2) * 0.25;
+            
+            b0 = float(c3);
+            b1 = float(2.0 * c3);
+            b2 = float(c3);
+            a1 = float(-c2);
+            a2 = float(c1);
+        }
 
 		void calculateLopassParams(double frequency, double resonance) {
 			/*
@@ -103,36 +124,6 @@ public:
 			a2 = float(c1);
 		}
 		
-        // Arguments in Hertz.
-		double magnitudeForFrequency( double inFreq) {
-			// Cast to Double.
-			double _b0 = double(b0);
-			double _b1 = double(b1);
-			double _b2 = double(b2);
-			double _a1 = double(a1);
-			double _a2 = double(a2);
-		
-			// Frequency on unit circle in z-plane.
-			double zReal      = cos(M_PI * inFreq);
-			double zImaginary = sin(M_PI * inFreq);
-			
-			// Zeros response.
-			double numeratorReal = (_b0 * (squared(zReal) - squared(zImaginary))) + (_b1 * zReal) + _b2;
-			double numeratorImaginary = (2.0 * _b0 * zReal * zImaginary) + (_b1 * zImaginary);
-			
-			double numeratorMagnitude = sqrt(squared(numeratorReal) + squared(numeratorImaginary));
-			
-			// Poles response.
-			double denominatorReal = squared(zReal) - squared(zImaginary) + (_a1 * zReal) + _a2;
-			double denominatorImaginary = (2.0 * zReal * zImaginary) + (_a1 * zImaginary);
-			
-			double denominatorMagnitude = sqrt(squared(denominatorReal) + squared(denominatorImaginary));
-			
-			// Total response.
-			double response = numeratorMagnitude / denominatorMagnitude;
-
-			return response;
-		}
 	};
 	
     // MARK: Member Functions
@@ -148,7 +139,6 @@ public:
 		dezipperRampDuration = (AUAudioFrameCount)floor(0.02 * sampleRate);
 		cutoffRamper.init();
 		resonanceRamper.init();
-		
 	}
 	
 	void reset() {
@@ -175,8 +165,6 @@ public:
 	AUValue getParameter(AUParameterAddress address) {
         switch (address) {
             case FilterParamCutoff:
-                // Return the goal. It is not thread safe to return the ramping value.
-                //return (cutoffRamper.getUIValue() * nyquist);
                 return roundf((cutoffRamper.getUIValue() * nyquist) * 100) / 100;
 
             case FilterParamResonance:

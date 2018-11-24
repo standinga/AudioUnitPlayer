@@ -47,7 +47,7 @@ const AudioUnitParameterID order = 0;
     AUParameter *orderParam = [AUParameterTree createParameterWithIdentifier:@"order" name:@"Order" address:order min:1 max:24 unit:kAudioUnitParameterUnit_Generic unitName:nil flags:0 valueStrings:nil dependentParameters:nil];
     
     // Initialize the parameter values.
-    cutoffParam.value = 10000;
+    cutoffParam.value = 200;
     orderParam.value = 2;
     
     _kernel.setParameter(FilterParamCutoff, cutoffParam.value);
