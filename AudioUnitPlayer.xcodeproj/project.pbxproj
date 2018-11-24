@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		908C018521A7A2EA0049FC81 /* VisualizeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908C018421A7A2EA0049FC81 /* VisualizeView.swift */; };
-		908C018821A863CE0049FC81 /* FFTHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 908C018721A863CE0049FC81 /* FFTHelper.cpp */; };
-		908C018921A863CE0049FC81 /* FFTHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 908C018721A863CE0049FC81 /* FFTHelper.cpp */; };
 		908C018B21A8C7DB0049FC81 /* WaveformView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908C018A21A8C7DB0049FC81 /* WaveformView.swift */; };
 		908C018C21A8C7DB0049FC81 /* WaveformView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908C018A21A8C7DB0049FC81 /* WaveformView.swift */; };
 		908C019221A8DB9D0049FC81 /* Shader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 908C019121A8DB9D0049FC81 /* Shader.fsh */; };
@@ -61,8 +59,6 @@
 
 /* Begin PBXFileReference section */
 		908C018421A7A2EA0049FC81 /* VisualizeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualizeView.swift; sourceTree = "<group>"; };
-		908C018621A863CE0049FC81 /* FFTHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FFTHelper.h; sourceTree = "<group>"; };
-		908C018721A863CE0049FC81 /* FFTHelper.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FFTHelper.cpp; sourceTree = "<group>"; };
 		908C018A21A8C7DB0049FC81 /* WaveformView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveformView.swift; sourceTree = "<group>"; };
 		908C019121A8DB9D0049FC81 /* Shader.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = Shader.fsh; sourceTree = "<group>"; };
 		908C019421A8DBAA0049FC81 /* Shader.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = Shader.vsh; sourceTree = "<group>"; };
@@ -170,8 +166,6 @@
 				90D8FBBC21A776B1002F99BD /* VolumeAudioUnit.mm */,
 				90D8FBD021A785E4002F99BD /* Buffers.hpp */,
 				90D8FBC421A776B1002F99BD /* VolumeAudioUnit-Bridging-Header.h */,
-				908C018621A863CE0049FC81 /* FFTHelper.h */,
-				908C018721A863CE0049FC81 /* FFTHelper.cpp */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -284,7 +278,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				90D8FBD121A78ED7002F99BD /* AudioUnitViewController.swift in Sources */,
-				908C018821A863CE0049FC81 /* FFTHelper.cpp in Sources */,
 				908C018521A7A2EA0049FC81 /* VisualizeView.swift in Sources */,
 				908C019C21A8DC0C0049FC81 /* GLView.swift in Sources */,
 				90D8FBA221A76631002F99BD /* ViewController.swift in Sources */,
@@ -304,7 +297,6 @@
 				908C019821A8DC090049FC81 /* GLUtils.swift in Sources */,
 				90D8FBBF21A776B1002F99BD /* AudioUnitViewController.swift in Sources */,
 				908C019B21A8DC0C0049FC81 /* GLView.swift in Sources */,
-				908C018921A863CE0049FC81 /* FFTHelper.cpp in Sources */,
 				908C018C21A8C7DB0049FC81 /* WaveformView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
