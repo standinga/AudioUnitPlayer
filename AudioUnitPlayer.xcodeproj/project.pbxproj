@@ -20,6 +20,9 @@
 		908C019C21A8DC0C0049FC81 /* GLView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908C019A21A8DC0C0049FC81 /* GLView.swift */; };
 		908C01A221A99FE80049FC81 /* FilterAU.mm in Sources */ = {isa = PBXBuildFile; fileRef = 908C01A121A99FE80049FC81 /* FilterAU.mm */; };
 		908C01A321A99FE80049FC81 /* FilterAU.mm in Sources */ = {isa = PBXBuildFile; fileRef = 908C01A121A99FE80049FC81 /* FilterAU.mm */; };
+		908C01B221A9A9750049FC81 /* FilterInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 908C01B021A9A9750049FC81 /* FilterInterface.storyboard */; };
+		908C01B621A9A9750049FC81 /* FilterAU.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 908C01A821A9A9740049FC81 /* FilterAU.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		908C01BC21A9AC0D0049FC81 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908C01BB21A9AC0D0049FC81 /* ViewModel.swift */; };
 		90D8FBA021A76631002F99BD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D8FB9F21A76631002F99BD /* AppDelegate.swift */; };
 		90D8FBA221A76631002F99BD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D8FBA121A76631002F99BD /* ViewController.swift */; };
 		90D8FBA521A76631002F99BD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 90D8FBA321A76631002F99BD /* Main.storyboard */; };
@@ -36,6 +39,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		908C01B421A9A9750049FC81 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 90D8FB9421A76631002F99BD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 908C01A721A9A9740049FC81;
+			remoteInfo = FilterAU;
+		};
 		90D8FBC521A776B1002F99BD /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 90D8FB9421A76631002F99BD /* Project object */;
@@ -52,6 +62,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				908C01B621A9A9750049FC81 /* FilterAU.appex in Embed App Extensions */,
 				90D8FBC721A776B1002F99BD /* VolumeAudioUnit.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
@@ -68,6 +79,11 @@
 		908C019A21A8DC0C0049FC81 /* GLView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GLView.swift; sourceTree = "<group>"; };
 		908C01A021A99FE80049FC81 /* FilterAU.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FilterAU.h; sourceTree = "<group>"; };
 		908C01A121A99FE80049FC81 /* FilterAU.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = FilterAU.mm; sourceTree = "<group>"; };
+		908C01A821A9A9740049FC81 /* FilterAU.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = FilterAU.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		908C01B121A9A9750049FC81 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/FilterInterface.storyboard; sourceTree = "<group>"; };
+		908C01B321A9A9750049FC81 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		908C01BA21A9AADB0049FC81 /* AudioUnitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioUnitViewController.swift; sourceTree = "<group>"; };
+		908C01BB21A9AC0D0049FC81 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		90D8FB9C21A76631002F99BD /* AudioUnitPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AudioUnitPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		90D8FB9F21A76631002F99BD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		90D8FBA121A76631002F99BD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -83,11 +99,18 @@
 		90D8FBBE21A776B1002F99BD /* AudioUnitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioUnitViewController.swift; sourceTree = "<group>"; };
 		90D8FBC121A776B1002F99BD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		90D8FBC321A776B1002F99BD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		90D8FBC421A776B1002F99BD /* VolumeAudioUnit-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "VolumeAudioUnit-Bridging-Header.h"; sourceTree = "<group>"; };
+		90D8FBC421A776B1002F99BD /* AudioUnit-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AudioUnit-Bridging-Header.h"; sourceTree = "<group>"; };
 		90D8FBD021A785E4002F99BD /* Buffers.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Buffers.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		908C01A521A9A9740049FC81 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		90D8FB9921A76631002F99BD /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -116,12 +139,23 @@
 			path = OpenGl;
 			sourceTree = "<group>";
 		};
+		908C01A921A9A9740049FC81 /* FilterAU */ = {
+			isa = PBXGroup;
+			children = (
+				908C01BA21A9AADB0049FC81 /* AudioUnitViewController.swift */,
+				908C01B021A9A9750049FC81 /* FilterInterface.storyboard */,
+				908C01B321A9A9750049FC81 /* Info.plist */,
+			);
+			path = FilterAU;
+			sourceTree = "<group>";
+		};
 		90D8FB9321A76631002F99BD = {
 			isa = PBXGroup;
 			children = (
 				90D8FBCC21A776F5002F99BD /* Shared */,
 				90D8FB9E21A76631002F99BD /* AudioUnitPlayer */,
 				90D8FBBA21A776B1002F99BD /* VolumeAudioUnit */,
+				908C01A921A9A9740049FC81 /* FilterAU */,
 				90D8FB9D21A76631002F99BD /* Products */,
 			);
 			sourceTree = "<group>";
@@ -131,6 +165,7 @@
 			children = (
 				90D8FB9C21A76631002F99BD /* AudioUnitPlayer.app */,
 				90D8FBB921A776B1002F99BD /* VolumeAudioUnit.appex */,
+				908C01A821A9A9740049FC81 /* FilterAU.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -140,6 +175,7 @@
 			children = (
 				908C019021A8DB5A0049FC81 /* OpenGl */,
 				90D8FB9F21A76631002F99BD /* AppDelegate.swift */,
+				908C01BB21A9AC0D0049FC81 /* ViewModel.swift */,
 				90D8FBA121A76631002F99BD /* ViewController.swift */,
 				908C018421A7A2EA0049FC81 /* VisualizeView.swift */,
 				908C018A21A8C7DB0049FC81 /* WaveformView.swift */,
@@ -171,7 +207,7 @@
 				90D8FBBB21A776B1002F99BD /* VolumeAudioUnit.h */,
 				90D8FBBC21A776B1002F99BD /* VolumeAudioUnit.mm */,
 				90D8FBD021A785E4002F99BD /* Buffers.hpp */,
-				90D8FBC421A776B1002F99BD /* VolumeAudioUnit-Bridging-Header.h */,
+				90D8FBC421A776B1002F99BD /* AudioUnit-Bridging-Header.h */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -179,6 +215,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		908C01A721A9A9740049FC81 /* FilterAU */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 908C01B721A9A9750049FC81 /* Build configuration list for PBXNativeTarget "FilterAU" */;
+			buildPhases = (
+				908C01A421A9A9740049FC81 /* Sources */,
+				908C01A521A9A9740049FC81 /* Frameworks */,
+				908C01A621A9A9740049FC81 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FilterAU;
+			productName = FilterAU;
+			productReference = 908C01A821A9A9740049FC81 /* FilterAU.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		90D8FB9B21A76631002F99BD /* AudioUnitPlayer */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 90D8FBAE21A76632002F99BD /* Build configuration list for PBXNativeTarget "AudioUnitPlayer" */;
@@ -192,6 +245,7 @@
 			);
 			dependencies = (
 				90D8FBC621A776B1002F99BD /* PBXTargetDependency */,
+				908C01B521A9A9750049FC81 /* PBXTargetDependency */,
 			);
 			name = AudioUnitPlayer;
 			productName = AudioUnitPlayer;
@@ -225,6 +279,9 @@
 				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = michal;
 				TargetAttributes = {
+					908C01A721A9A9740049FC81 = {
+						CreatedOnToolsVersion = 10.1;
+					};
 					90D8FB9B21A76631002F99BD = {
 						CreatedOnToolsVersion = 10.1;
 					};
@@ -248,11 +305,20 @@
 			targets = (
 				90D8FB9B21A76631002F99BD /* AudioUnitPlayer */,
 				90D8FBB821A776B1002F99BD /* VolumeAudioUnit */,
+				908C01A721A9A9740049FC81 /* FilterAU */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		908C01A621A9A9740049FC81 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				908C01B221A9A9750049FC81 /* FilterInterface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		90D8FB9A21A76631002F99BD /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -279,6 +345,13 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		908C01A421A9A9740049FC81 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		90D8FB9821A76631002F99BD /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -286,6 +359,7 @@
 				90D8FBD121A78ED7002F99BD /* AudioUnitViewController.swift in Sources */,
 				908C018521A7A2EA0049FC81 /* VisualizeView.swift in Sources */,
 				908C019C21A8DC0C0049FC81 /* GLView.swift in Sources */,
+				908C01BC21A9AC0D0049FC81 /* ViewModel.swift in Sources */,
 				90D8FBA221A76631002F99BD /* ViewController.swift in Sources */,
 				90D8FBA021A76631002F99BD /* AppDelegate.swift in Sources */,
 				908C01A221A99FE80049FC81 /* FilterAU.mm in Sources */,
@@ -312,6 +386,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		908C01B521A9A9750049FC81 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 908C01A721A9A9740049FC81 /* FilterAU */;
+			targetProxy = 908C01B421A9A9750049FC81 /* PBXContainerItemProxy */;
+		};
 		90D8FBC621A776B1002F99BD /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 90D8FBB821A776B1002F99BD /* VolumeAudioUnit */;
@@ -320,6 +399,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		908C01B021A9A9750049FC81 /* FilterInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				908C01B121A9A9750049FC81 /* Base */,
+			);
+			name = FilterInterface.storyboard;
+			sourceTree = "<group>";
+		};
 		90D8FBA321A76631002F99BD /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -347,6 +434,42 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		908C01B821A9A9750049FC81 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 7G4JF8R3R6;
+				INFOPLIST_FILE = FilterAU/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = co.brama.AudioUnitPlayer.FilterAU;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		908C01B921A9A9750049FC81 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 7G4JF8R3R6;
+				INFOPLIST_FILE = FilterAU/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = co.brama.AudioUnitPlayer.FilterAU;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		90D8FBAC21A76632002F99BD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -478,7 +601,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = co.brama.AudioUnitPlayer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "Shared/VolumeAudioUnit-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Shared/AudioUnit-Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -499,7 +622,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = co.brama.AudioUnitPlayer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "Shared/VolumeAudioUnit-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Shared/AudioUnit-Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -520,7 +643,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = co.brama.AudioUnitPlayer.VolumeAudioUnit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "Shared/VolumeAudioUnit-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Shared/AudioUnit-Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -541,7 +664,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = co.brama.AudioUnitPlayer.VolumeAudioUnit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "Shared/VolumeAudioUnit-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Shared/AudioUnit-Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -550,6 +673,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		908C01B721A9A9750049FC81 /* Build configuration list for PBXNativeTarget "FilterAU" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				908C01B821A9A9750049FC81 /* Debug */,
+				908C01B921A9A9750049FC81 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		90D8FB9721A76631002F99BD /* Build configuration list for PBXProject "AudioUnitPlayer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

@@ -110,7 +110,7 @@ public class AudioPlayer: NSObject {
     
     private func destroyAudioUnit() {
 
-        guard var avAudioUnits = avAudioUnits else {
+        guard var avAudioUnits = avAudioUnits, avAudioUnits.count > 0 else {
             return
         }
         
@@ -122,8 +122,6 @@ public class AudioPlayer: NSObject {
                 // break audiounit -> mixer connection
                 engine.disconnectNodeInput(engine.mainMixerNode)
                 
-                // connect player -> mixer
-                engine.connect(playerNode, to: engine.mainMixerNode, format: file!.processingFormat)
                 
                 // release all references
                 engine.detach(avAudioUnits[i]!)
@@ -131,6 +129,9 @@ public class AudioPlayer: NSObject {
                 avAudioUnits[i] = nil
             }
         }
+        
+        // connect player -> mixer
+        engine.connect(playerNode, to: engine.mainMixerNode, format: file!.processingFormat)
     }
     
     public func play() {

@@ -7,3 +7,4 @@
 //
 
 #import "VolumeAudioUnit.h"
+#import "FilterAU.h"
