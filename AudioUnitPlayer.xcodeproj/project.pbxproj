@@ -8,6 +8,18 @@
 
 /* Begin PBXBuildFile section */
 		908C018521A7A2EA0049FC81 /* VisualizeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908C018421A7A2EA0049FC81 /* VisualizeView.swift */; };
+		908C018821A863CE0049FC81 /* FFTHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 908C018721A863CE0049FC81 /* FFTHelper.cpp */; };
+		908C018921A863CE0049FC81 /* FFTHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 908C018721A863CE0049FC81 /* FFTHelper.cpp */; };
+		908C018B21A8C7DB0049FC81 /* WaveformView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908C018A21A8C7DB0049FC81 /* WaveformView.swift */; };
+		908C018C21A8C7DB0049FC81 /* WaveformView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908C018A21A8C7DB0049FC81 /* WaveformView.swift */; };
+		908C019221A8DB9D0049FC81 /* Shader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 908C019121A8DB9D0049FC81 /* Shader.fsh */; };
+		908C019321A8DB9D0049FC81 /* Shader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 908C019121A8DB9D0049FC81 /* Shader.fsh */; };
+		908C019521A8DBAA0049FC81 /* Shader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 908C019421A8DBAA0049FC81 /* Shader.vsh */; };
+		908C019621A8DBAA0049FC81 /* Shader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 908C019421A8DBAA0049FC81 /* Shader.vsh */; };
+		908C019821A8DC090049FC81 /* GLUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908C019721A8DC090049FC81 /* GLUtils.swift */; };
+		908C019921A8DC090049FC81 /* GLUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908C019721A8DC090049FC81 /* GLUtils.swift */; };
+		908C019B21A8DC0C0049FC81 /* GLView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908C019A21A8DC0C0049FC81 /* GLView.swift */; };
+		908C019C21A8DC0C0049FC81 /* GLView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908C019A21A8DC0C0049FC81 /* GLView.swift */; };
 		90D8FBA021A76631002F99BD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D8FB9F21A76631002F99BD /* AppDelegate.swift */; };
 		90D8FBA221A76631002F99BD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D8FBA121A76631002F99BD /* ViewController.swift */; };
 		90D8FBA521A76631002F99BD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 90D8FBA321A76631002F99BD /* Main.storyboard */; };
@@ -49,6 +61,13 @@
 
 /* Begin PBXFileReference section */
 		908C018421A7A2EA0049FC81 /* VisualizeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualizeView.swift; sourceTree = "<group>"; };
+		908C018621A863CE0049FC81 /* FFTHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FFTHelper.h; sourceTree = "<group>"; };
+		908C018721A863CE0049FC81 /* FFTHelper.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FFTHelper.cpp; sourceTree = "<group>"; };
+		908C018A21A8C7DB0049FC81 /* WaveformView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveformView.swift; sourceTree = "<group>"; };
+		908C019121A8DB9D0049FC81 /* Shader.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = Shader.fsh; sourceTree = "<group>"; };
+		908C019421A8DBAA0049FC81 /* Shader.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = Shader.vsh; sourceTree = "<group>"; };
+		908C019721A8DC090049FC81 /* GLUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GLUtils.swift; sourceTree = "<group>"; };
+		908C019A21A8DC0C0049FC81 /* GLView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GLView.swift; sourceTree = "<group>"; };
 		90D8FB9C21A76631002F99BD /* AudioUnitPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AudioUnitPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		90D8FB9F21A76631002F99BD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		90D8FBA121A76631002F99BD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -86,6 +105,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		908C019021A8DB5A0049FC81 /* OpenGl */ = {
+			isa = PBXGroup;
+			children = (
+				908C019721A8DC090049FC81 /* GLUtils.swift */,
+				908C019A21A8DC0C0049FC81 /* GLView.swift */,
+				908C019121A8DB9D0049FC81 /* Shader.fsh */,
+				908C019421A8DBAA0049FC81 /* Shader.vsh */,
+			);
+			path = OpenGl;
+			sourceTree = "<group>";
+		};
 		90D8FB9321A76631002F99BD = {
 			isa = PBXGroup;
 			children = (
@@ -108,9 +138,11 @@
 		90D8FB9E21A76631002F99BD /* AudioUnitPlayer */ = {
 			isa = PBXGroup;
 			children = (
+				908C019021A8DB5A0049FC81 /* OpenGl */,
 				90D8FB9F21A76631002F99BD /* AppDelegate.swift */,
 				90D8FBA121A76631002F99BD /* ViewController.swift */,
 				908C018421A7A2EA0049FC81 /* VisualizeView.swift */,
+				908C018A21A8C7DB0049FC81 /* WaveformView.swift */,
 				90D8FBB121A7668B002F99BD /* AudioPlayer.swift */,
 				90D8FBA321A76631002F99BD /* Main.storyboard */,
 				90D8FBA621A76631002F99BD /* Assets.xcassets */,
@@ -138,6 +170,8 @@
 				90D8FBBC21A776B1002F99BD /* VolumeAudioUnit.mm */,
 				90D8FBD021A785E4002F99BD /* Buffers.hpp */,
 				90D8FBC421A776B1002F99BD /* VolumeAudioUnit-Bridging-Header.h */,
+				908C018621A863CE0049FC81 /* FFTHelper.h */,
+				908C018721A863CE0049FC81 /* FFTHelper.cpp */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -225,8 +259,10 @@
 			files = (
 				90D8FBAA21A76631002F99BD /* LaunchScreen.storyboard in Resources */,
 				90D8FBA721A76631002F99BD /* Assets.xcassets in Resources */,
+				908C019521A8DBAA0049FC81 /* Shader.vsh in Resources */,
 				90D8FBB421A772A2002F99BD /* drumLoop.caf in Resources */,
 				90D8FBA521A76631002F99BD /* Main.storyboard in Resources */,
+				908C019221A8DB9D0049FC81 /* Shader.fsh in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -234,7 +270,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				908C019321A8DB9D0049FC81 /* Shader.fsh in Resources */,
 				90D8FBC221A776B1002F99BD /* MainInterface.storyboard in Resources */,
+				908C019621A8DBAA0049FC81 /* Shader.vsh in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -246,11 +284,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				90D8FBD121A78ED7002F99BD /* AudioUnitViewController.swift in Sources */,
+				908C018821A863CE0049FC81 /* FFTHelper.cpp in Sources */,
 				908C018521A7A2EA0049FC81 /* VisualizeView.swift in Sources */,
+				908C019C21A8DC0C0049FC81 /* GLView.swift in Sources */,
 				90D8FBA221A76631002F99BD /* ViewController.swift in Sources */,
 				90D8FBA021A76631002F99BD /* AppDelegate.swift in Sources */,
 				90D8FBCE21A778AE002F99BD /* VolumeAudioUnit.mm in Sources */,
 				90D8FBB221A7668B002F99BD /* AudioPlayer.swift in Sources */,
+				908C018B21A8C7DB0049FC81 /* WaveformView.swift in Sources */,
+				908C019921A8DC090049FC81 /* GLUtils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -259,7 +301,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				90D8FBBD21A776B1002F99BD /* VolumeAudioUnit.mm in Sources */,
+				908C019821A8DC090049FC81 /* GLUtils.swift in Sources */,
 				90D8FBBF21A776B1002F99BD /* AudioUnitViewController.swift in Sources */,
+				908C019B21A8DC0C0049FC81 /* GLView.swift in Sources */,
+				908C018921A863CE0049FC81 /* FFTHelper.cpp in Sources */,
+				908C018C21A8C7DB0049FC81 /* WaveformView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

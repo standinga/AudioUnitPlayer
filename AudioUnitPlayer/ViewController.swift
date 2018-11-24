@@ -15,6 +15,7 @@ class ViewController: UIViewController {
     private var player: AudioPlayer!
     var pluginVC: AudioUnitViewController!
     
+    @IBOutlet weak var glView: GLView!
     @IBOutlet weak var pluginContainer: UIView!
     @IBOutlet weak var visualizeView: VisualizeView!
     
@@ -30,7 +31,7 @@ class ViewController: UIViewController {
         componentDescription.componentFlags = 0
         componentDescription.componentFlagsMask = 0
         AUAudioUnit.registerSubclass(VolumeAudioUnit.self, as: componentDescription, name: "VoluemPlugin", version: UInt32.max)
-        
+        glView.setup()
         player.selectAudioUnitWithComponentDescription(componentDescription) {
             self.pluginVC.audioUnit = self.player.auAudioUnit
         }
@@ -66,7 +67,8 @@ class ViewController: UIViewController {
 
 extension ViewController : AudioPlayerDelegate {
     func onBuffer(_ samples: UnsafeBufferPointer<Float>) {
-        visualizeView.updateBuffer(samples)
+//        visualizeView.updateBuffer(samples)
+        glView.updateBuffer(samples)
     }
 }
 
