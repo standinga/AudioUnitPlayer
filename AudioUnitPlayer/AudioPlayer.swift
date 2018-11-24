@@ -96,7 +96,7 @@ public class AudioPlayer: NSObject {
             self.engine.connect(avAudioUnit, to: self.engine.mainMixerNode, format: self.file!.processingFormat)
             
             // get samples from audio unit
-            avAudioUnit.installTap(onBus: 0, bufferSize: 1024, format: self.file!.processingFormat) { buffer, timestamp in
+            avAudioUnit.installTap(onBus: 0, bufferSize: 4096 * 4, format: self.file!.processingFormat) { buffer, timestamp in
                 let sampleData = UnsafeBufferPointer(start: buffer.floatChannelData![0], count: Int(buffer.frameLength))
                 self.delegate?.onBuffer(sampleData)
             }

@@ -12,7 +12,7 @@ import OpenGLES
 
 class GLView: GLKView {
     
-    private var dataLength = 4096
+    private var dataLength = 4096 * 4
     private var xPos: UnsafeMutableRawPointer!
     private var samplesData: UnsafeMutableRawPointer!
     private var glFloatStride = 0
