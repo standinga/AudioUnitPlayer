@@ -21,7 +21,6 @@ class GLView: GLKView {
 //    var samples
     var xPos: UnsafeMutableRawPointer!
     var samplesData: UnsafeMutableRawPointer!
-    var samplesData2: UnsafeMutableRawPointer!
     var glFloatStride = 0
     var program: GLuint = 0
     
@@ -91,10 +90,7 @@ class GLView: GLKView {
         for i in 0..<dataLength {
             let val = GLfloat(samples[i])
             (samplesData + i * glFloatStride).storeBytes(of: val, as: GLfloat.self)
-            // for testing
         }
-        samplesData2 = UnsafeMutableRawPointer(mutating: Array(samples))
-        let ss = UnsafeRawBufferPointer(start: samplesData2, count: dataLength)
         DispatchQueue.main.async {
             self.display()
         }
