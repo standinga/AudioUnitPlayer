@@ -16,7 +16,7 @@ public class AudioPlayer: NSObject {
     
     weak var delegate: AudioPlayerDelegate?
     
-    public var auAudioUnit: AUAudioUnit?
+    public var volumeAudioUnit: AUAudioUnit?
     
     private let stateChangeQueue = DispatchQueue(label: "AudioPlayer.stateChangeQueue")
     
@@ -24,7 +24,7 @@ public class AudioPlayer: NSObject {
     
     private let playerNode = AVAudioPlayerNode()
     
-    private var avAudioUnit: AVAudioUnit?
+    private var avAudioUnits: [AVAudioUnit?]?
     
     private var file: AVAudioFile?
     
@@ -84,7 +84,7 @@ public class AudioPlayer: NSObject {
                 NSLog("avAudioUnit nil")
                 return
             }
-            self.avAudioUnit = avAudioUnit
+            self.avAudioUnits?.append(avAudioUnit)
             self.engine.attach(avAudioUnit)
             // disconnect and reconnect
             self.engine.disconnectNodeInput(self.engine.mainMixerNode)
@@ -101,7 +101,7 @@ public class AudioPlayer: NSObject {
                 self.delegate?.onBuffer(sampleData)
             }
             
-            self.auAudioUnit = avAudioUnit.auAudioUnit
+            self.volumeAudioUnit = avAudioUnit.auAudioUnit
             avAudioUnit.auAudioUnit.contextName = "running in AUv3Host"
             
             done()
@@ -109,24 +109,29 @@ public class AudioPlayer: NSObject {
     }
     
     private func destroyAudioUnit() {
-        if avAudioUnit != nil {
-            engine.disconnectNodeInput(avAudioUnit!)
+
+        guard var avAudioUnits = avAudioUnits else {
+            return
+        }
         
-            // break audiounit -> mixer connection
-            engine.disconnectNodeInput(engine.mainMixerNode)
-            
-            // connect player -> mixer
-            engine.connect(playerNode, to: engine.mainMixerNode, format: file!.processingFormat)
-            
-            // release all references
-            engine.detach(avAudioUnit!)
-            
-            avAudioUnit = nil
-            auAudioUnit = nil
+        volumeAudioUnit = nil
+        for i in 0..<avAudioUnits.count {
+            if avAudioUnits[i] != nil {
+                engine.disconnectNodeInput(avAudioUnits[i]!)
+                
+                // break audiounit -> mixer connection
+                engine.disconnectNodeInput(engine.mainMixerNode)
+                
+                // connect player -> mixer
+                engine.connect(playerNode, to: engine.mainMixerNode, format: file!.processingFormat)
+                
+                // release all references
+                engine.detach(avAudioUnits[i]!)
+                
+                avAudioUnits[i] = nil
+            }
         }
     }
-    
-    
     
     public func play() {
         stateChangeQueue.sync {

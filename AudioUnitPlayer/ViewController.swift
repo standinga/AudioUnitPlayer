@@ -33,7 +33,7 @@ class ViewController: UIViewController {
         AUAudioUnit.registerSubclass(VolumeAudioUnit.self, as: componentDescription, name: "VoluemPlugin", version: UInt32.max)
         glView.setup()
         player.selectAudioUnitWithComponentDescription(componentDescription) {
-            self.pluginVC.audioUnit = self.player.auAudioUnit
+            self.pluginVC.audioUnit = self.player.volumeAudioUnit
         }
     }
     
