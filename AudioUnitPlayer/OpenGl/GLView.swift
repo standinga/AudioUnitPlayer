@@ -21,6 +21,7 @@ class GLView: GLKView {
 //    var samples
     var xPos: UnsafeMutableRawPointer!
     var samplesData: UnsafeMutableRawPointer!
+    var samplesData2: UnsafeMutableRawPointer!
     var glFloatStride = 0
     var program: GLuint = 0
     
@@ -79,7 +80,7 @@ class GLView: GLKView {
                 fatalError("glGetUniformLocation uFragColor fail")
             }
             uFragColorHandle = GLuint(handleColor)
-            
+            generateXPos()
         } else {
             print("failed to init opengl es2 context!")
         }
@@ -87,11 +88,13 @@ class GLView: GLKView {
     
     
     func updateBuffer(_ samples: UnsafeBufferPointer<Float>) {
-//        samplesData = samples.map{ GLfloat($0) }.poi
         for i in 0..<dataLength {
             let val = GLfloat(samples[i])
             (samplesData + i * glFloatStride).storeBytes(of: val, as: GLfloat.self)
+            // for testing
         }
+        samplesData2 = UnsafeMutableRawPointer(mutating: Array(samples))
+        let ss = UnsafeRawBufferPointer(start: samplesData2, count: dataLength)
         DispatchQueue.main.async {
             self.display()
         }
@@ -111,7 +114,10 @@ class GLView: GLKView {
         glClearColor(1, 0.0, 0.0, 1)
         glClear(GLbitfield(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT))
         glUseProgram(program)
-                
+        
+        glEnableVertexAttribArray(vPositionHandle)
+        glVertexAttribPointer(vPositionHandle, 1, GLenum(GL_FLOAT), GLboolean(GL_FALSE), 0, xPos)
+        
         glEnableVertexAttribArray(vValueHandle)
         glVertexAttribPointer(vValueHandle, 1, GLenum(GL_FLOAT), GLboolean(GL_FALSE), GLsizei(MemoryLayout.size(ofValue: GL_FLOAT)), samplesData)
         
