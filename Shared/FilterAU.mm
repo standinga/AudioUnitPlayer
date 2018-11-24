@@ -9,6 +9,7 @@
 #import "FilterAU.h"
 #import "Buffers.hpp"
 #import <AVFoundation/AVFoundation.h>
+#import "FilterDSPKernel.hpp"
 
 const AudioUnitParameterID cutoff = 0;
 const AudioUnitParameterID order = 0;
@@ -21,6 +22,7 @@ const AudioUnitParameterID order = 0;
 @end
 
 @implementation FilterAU {
+    FilterDSPKernel _kernel;
     AUAudioUnitBus *_inputBus;
     Buffers _buffers;
 }
@@ -35,11 +37,21 @@ const AudioUnitParameterID order = 0;
     // Initialize a default format for the busses.
     AVAudioFormat *defaultFormat = [[AVAudioFormat alloc] initStandardFormatWithSampleRate:44100.0 channels:2];
     
+    // Create a DSP kernel to handle the signal processing.
+    _kernel.init(defaultFormat.channelCount, defaultFormat.sampleRate);
+    
+    
     // Create parameter objects.
     AUParameter *cutoffParam = [AUParameterTree createParameterWithIdentifier:@"cutoff" name:@"Cut off" address:cutoff min:0 max:22000.0 unit:kAudioUnitParameterUnit_Generic unitName:nil flags:0 valueStrings:nil dependentParameters:nil];
     
+    AUParameter *orderParam = [AUParameterTree createParameterWithIdentifier:@"order" name:@"Order" address:order min:1 max:24 unit:kAudioUnitParameterUnit_Generic unitName:nil flags:0 valueStrings:nil dependentParameters:nil];
+    
     // Initialize the parameter values.
-    cutoffParam.value = 500;
+    cutoffParam.value = 10000;
+    orderParam.value = 2;
+    
+    _kernel.setParameter(FilterParamCutoff, cutoffParam.value);
+    _kernel.setParameter(FilterParamResonance, orderParam.value);
     
     // Create the parameter tree.
     _parameterTree = [AUParameterTree createTreeWithChildren:@[ cutoffParam ]];
@@ -100,6 +112,8 @@ const AudioUnitParameterID order = 0;
     // Allocate your resources.
     _buffers.allocateRenderResources(self.maximumFramesToRender, _inputBus.format);
     
+    _kernel.init(self.outputBus.format.channelCount, self.outputBus.format.sampleRate);
+    _kernel.reset();
     return YES;
 }
 
@@ -115,7 +129,7 @@ const AudioUnitParameterID order = 0;
 
 - (AUInternalRenderBlock)internalRenderBlock {
     // Capture in locals to avoid Obj-C member lookups. If "self" is captured in render, we're doing it wrong. See sample code.
-    
+    __block FilterDSPKernel *dsp = &_kernel;
     __block Buffers *buffers = &_buffers;
 //    __block float *volumePtr = &volume;
     return ^AUAudioUnitStatus(AudioUnitRenderActionFlags *actionFlags, const AudioTimeStamp *timestamp, AVAudioFrameCount frameCount, NSInteger outputBusNumber, AudioBufferList *outputData, const AURenderEvent *realtimeEventListHead, AURenderPullInputBlock pullInputBlock) {
@@ -131,13 +145,8 @@ const AudioUnitParameterID order = 0;
         AudioBufferList *inAudioBufferList = buffers->mutableAudioBufferList;
         AudioBufferList *outputAudioBufferList = outputData;
         
-        float *input = (float*)inAudioBufferList->mBuffers[0].mData;
-        float *output = (float*)outputAudioBufferList->mBuffers[0].mData;
-        UInt32 dataSize = inAudioBufferList->mBuffers[0].mDataByteSize;
-//        float vol = *volumePtr;
-        for (int i = 0; i < dataSize; i++) {
-            output[i] = input[i];
-        }
+        dsp->setBuffers(inAudioBufferList, outputAudioBufferList);
+        dsp->processWithEvents(timestamp, frameCount, realtimeEventListHead);
         
         return noErr;
     };

@@ -39,7 +39,7 @@ public class AudioPlayer: NSObject {
     }
     
     private func loadAudioFile() {
-        guard let fileURL = Bundle.main.url(forResource: "drumLoop", withExtension: "caf") else {
+        guard let fileURL = Bundle.main.url(forResource: "b", withExtension: "mp3") else {
             fatalError("can't create fileURL")
         }
         guard let file = try? AVAudioFile(forReading: fileURL) else {

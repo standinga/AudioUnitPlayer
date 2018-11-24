@@ -23,6 +23,9 @@
 		908C01B221A9A9750049FC81 /* FilterInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 908C01B021A9A9750049FC81 /* FilterInterface.storyboard */; };
 		908C01B621A9A9750049FC81 /* FilterAU.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 908C01A821A9A9740049FC81 /* FilterAU.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		908C01BC21A9AC0D0049FC81 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908C01BB21A9AC0D0049FC81 /* ViewModel.swift */; };
+		908C01BF21A9B0440049FC81 /* DSPKernel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 908C01BE21A9B0440049FC81 /* DSPKernel.mm */; };
+		908C01C021A9B0440049FC81 /* DSPKernel.mm in Sources */ = {isa = PBXBuildFile; fileRef = 908C01BE21A9B0440049FC81 /* DSPKernel.mm */; };
+		908C01C421A9B2F30049FC81 /* b.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 908C01C321A9B2F20049FC81 /* b.mp3 */; };
 		90D8FBA021A76631002F99BD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D8FB9F21A76631002F99BD /* AppDelegate.swift */; };
 		90D8FBA221A76631002F99BD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D8FBA121A76631002F99BD /* ViewController.swift */; };
 		90D8FBA521A76631002F99BD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 90D8FBA321A76631002F99BD /* Main.storyboard */; };
@@ -84,6 +87,11 @@
 		908C01B321A9A9750049FC81 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		908C01BA21A9AADB0049FC81 /* AudioUnitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioUnitViewController.swift; sourceTree = "<group>"; };
 		908C01BB21A9AC0D0049FC81 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		908C01BD21A9B0430049FC81 /* DSPKernel.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DSPKernel.hpp; sourceTree = "<group>"; };
+		908C01BE21A9B0440049FC81 /* DSPKernel.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = DSPKernel.mm; sourceTree = "<group>"; };
+		908C01C121A9B0690049FC81 /* FilterDSPKernel.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = FilterDSPKernel.hpp; sourceTree = "<group>"; };
+		908C01C221A9B0690049FC81 /* ParameterRamper.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ParameterRamper.hpp; sourceTree = "<group>"; };
+		908C01C321A9B2F20049FC81 /* b.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = b.mp3; path = ../../../../../../../Users/michal/b.mp3; sourceTree = "<group>"; };
 		90D8FB9C21A76631002F99BD /* AudioUnitPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AudioUnitPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		90D8FB9F21A76631002F99BD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		90D8FBA121A76631002F99BD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -185,6 +193,7 @@
 				90D8FBA821A76631002F99BD /* LaunchScreen.storyboard */,
 				90D8FBAB21A76632002F99BD /* Info.plist */,
 				90D8FBB321A7681B002F99BD /* drumLoop.caf */,
+				908C01C321A9B2F20049FC81 /* b.mp3 */,
 			);
 			path = AudioUnitPlayer;
 			sourceTree = "<group>";
@@ -204,10 +213,14 @@
 			children = (
 				908C01A021A99FE80049FC81 /* FilterAU.h */,
 				908C01A121A99FE80049FC81 /* FilterAU.mm */,
+				908C01C121A9B0690049FC81 /* FilterDSPKernel.hpp */,
+				908C01BD21A9B0430049FC81 /* DSPKernel.hpp */,
+				908C01BE21A9B0440049FC81 /* DSPKernel.mm */,
 				90D8FBBB21A776B1002F99BD /* VolumeAudioUnit.h */,
 				90D8FBBC21A776B1002F99BD /* VolumeAudioUnit.mm */,
 				90D8FBD021A785E4002F99BD /* Buffers.hpp */,
 				90D8FBC421A776B1002F99BD /* AudioUnit-Bridging-Header.h */,
+				908C01C221A9B0690049FC81 /* ParameterRamper.hpp */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -325,6 +338,7 @@
 			files = (
 				90D8FBAA21A76631002F99BD /* LaunchScreen.storyboard in Resources */,
 				90D8FBA721A76631002F99BD /* Assets.xcassets in Resources */,
+				908C01C421A9B2F30049FC81 /* b.mp3 in Resources */,
 				908C019521A8DBAA0049FC81 /* Shader.vsh in Resources */,
 				90D8FBB421A772A2002F99BD /* drumLoop.caf in Resources */,
 				90D8FBA521A76631002F99BD /* Main.storyboard in Resources */,
@@ -356,6 +370,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				908C01BF21A9B0440049FC81 /* DSPKernel.mm in Sources */,
 				90D8FBD121A78ED7002F99BD /* AudioUnitViewController.swift in Sources */,
 				908C018521A7A2EA0049FC81 /* VisualizeView.swift in Sources */,
 				908C019C21A8DC0C0049FC81 /* GLView.swift in Sources */,
@@ -374,6 +389,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				908C01C021A9B0440049FC81 /* DSPKernel.mm in Sources */,
 				90D8FBBD21A776B1002F99BD /* VolumeAudioUnit.mm in Sources */,
 				908C01A321A99FE80049FC81 /* FilterAU.mm in Sources */,
 				908C019821A8DC090049FC81 /* GLUtils.swift in Sources */,

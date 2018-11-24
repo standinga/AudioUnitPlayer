@@ -28,7 +28,7 @@ class ViewModel: NSObject {
         componentDescription.componentManufacturer = 0x424f524d // 'BORM' in hex
         componentDescription.componentFlags = 0
         componentDescription.componentFlagsMask = 0
-        AUAudioUnit.registerSubclass(VolumeAudioUnit.self, as: componentDescription, name: "VoluemPlugin", version: UInt32.max)
+        AUAudioUnit.registerSubclass(FilterAU.self, as: componentDescription, name: "VoluemPlugin", version: UInt32.max)
         return componentDescription
     }
     
